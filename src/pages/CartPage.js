@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
+import Navbar from '../components/Navbar';
 
 export default function CartPage() {
   const [cart, setCart] = useState([
@@ -23,8 +24,11 @@ export default function CartPage() {
   };
 
   return (
+    <div>
+        <Navbar color={"bg-red-500"} />
+    
     <div className="container mx-auto px-4 py-12 bg-[#f5e6c9]">
-      <h1 className="text-4xl font-bold mb-8 ml-20">Your Cart</h1>
+      <h1 className="text-4xl font-bold mb-8 ml-20 mt-24 text-red-500">Your Cart</h1>
       {cart.length > 0 ? (
         <div className="bg-white rounded-lg shadow-lg p-6 mx-20">
           <div className="bg-red-500 text-white rounded-full p-4 mb-6 grid grid-cols-4 gap-4">
@@ -95,6 +99,7 @@ export default function CartPage() {
       ) : (
         <p>Your cart is empty.</p>
       )}
+    </div>
     </div>
   );
 }

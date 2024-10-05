@@ -13,7 +13,7 @@ export default function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
-        <Navbar />
+        {/* <Navbar /> */}
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<HomeScreen />} />

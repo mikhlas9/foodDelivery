@@ -1,127 +1,103 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { ShoppingCart, User, Menu, X } from 'lucide-react'
-import { Link } from 'react-router-dom'
+// src/components/Navbar.js
+import React, { useState, useEffect } from 'react';
+import { ShoppingCart, User, Menu as MenuIcon, Heart, X, Home, Info, Users, MessageSquare, BookOpen } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
+export default function Navbar({ color }) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const menuItems = [
+    { title: 'Homepage', icon: Home, link: '/' },
+    { title: 'About Us', icon: Info, link: '/about' },
+    { title: 'Our Partners', icon: Users, link: '/partners' },
+    { title: "Let's talk", icon: MessageSquare, link: '/contact' },
+    { title: 'Menu', icon: BookOpen, link: '/menu' },
+    { title: 'Profile', icon: User, link: '/user' },
+    { title: 'Wishlist', icon: Heart, link: '/wishlist' },
+  ];
 
   return (
-    <nav className="bg-white border-b border-black">
-      <div className="max-w-fullxl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex-shrink-0 flex items-center">
-            <Link to="/" className="text-2xl font-bold text-red-500">
-              <motion.span
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                MI-Theme
-              </motion.span>
-            </Link>
-          </div>
+    <div className={`${isMenuOpen ? 'overflow-hidden h-screen' : ''}`}>
+      <nav className={`fixed top-0 left-0 right-0 z-20 transition-all duration-300 rounded-full mt-5 mx-5 ${isScrolled ? 'bg-red-500' : color}`}>
+        <div className="max-w-fullxl mx-auto px-10 py-3">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex-shrink-0 flex items-center">
+              <Link to="/" className="text-4xl font-extrabold   text-white">
+                FastFood
+              </Link>
 
-          {/* Links for larger screens */}
-          <div className="hidden md:flex items-center space-x-4">
-            {['Menu', 'About', 'Location'].map((item, index) => (
-              <motion.div
-                key={item}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <Link
-                  to={`/${item.toLowerCase()}`}
-                  className="px-3 py-2 rounded-md text-sm font-medium text-black hover:text-red-500 hover:bg-gray-300"
-                >
-                  {item}
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-          
-          {/* User and Cart for larger screens */}
-          <div className="hidden md:flex items-center space-x-4">
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="p-2 rounded-full text-black hover:text-red-500"
-            >
-              <a href="/user">
-                <User className="h-6 w-6" />
-              </a>
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="p-2 rounded-full text-black hover:text-red-500"
-            >
-              <a href="/cart">
+
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <Link to="/cart" className={`md:hidden ${isScrolled ? 'text-white hover:text-black' : 'text-white hover:text-red-500'}`}>
                 <ShoppingCart className="h-6 w-6" />
-              </a>
-            </motion.button>
-          </div>
+              </Link>
+              <button onClick={toggleMenu} className={`${isScrolled ? 'text-white hover:text-black hover:bg-white hover:text-red-500 rounded-full p-3' : 'text-white hover:bg-white hover:text-red-500 md:bg-red-500 rounded-full p-5'}`}>
+                {isMenuOpen ? <X className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
+              </button>
+            </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
-            <motion.button
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-md text-gray-400 hover:text-white focus:outline-none"
-            >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </motion.button>
+            <div className="hidden md:flex items-center space-x-3">
+              <Link to="/menu" className={`${isScrolled ? 'bg-white text-red-500 hover:bg-white hover:text-black' : 'bg-red-500 text-white hover:bg-white hover:text-red-500'} px-5 py-2 rounded-full font-semibold transition duration-300`}>
+                Menu
+              </Link>
+              <Link to="/user" className={`hover:bg-white hover:text-red-500 rounded-full p-3 ${isScrolled ? 'text-white hover:text-black ' : 'text-white hover:text-red-500 '}`}>
+                <User className="h-6 w-6" />
+              </Link>
+              <Link to="/cart" className={`hover:bg-white hover:text-red-500 rounded-full p-3 ${isScrolled ? 'text-white hover:text-black' : 'text-white hover:text-red-500'}`}>
+                <ShoppingCart className="h-6 w-6" />
+              </Link>
+              <Link to="/wishlist" className={`hover:bg-white hover:text-red-500 rounded-full p-3 ${isScrolled ? 'text-white hover:text-black' : 'text-white hover:text-red-500'}`}>
+                <Heart className="h-6 w-6" />
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden"
-          >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              {['Menu', 'About', 'Location'].map((item) => (
-                <Link
-                  key={item}
-                  to={`/${item.toLowerCase()}`}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700"
-                >
-                  {item}
-                </Link>
-              ))}
+      {isMenuOpen && (
+        <div className="fixed inset-0 z-30 flex items-center justify-center">
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-md" onClick={toggleMenu}></div>
 
-              {/* Add User and Cart links for mobile */}
-              <div className="flex items-center space-x-4">
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="p-2 rounded-full text-black hover:text-red-500"
-                >
-                  <a href="/user">
-                    <User className="h-6 w-6" />
-                  </a>
-                </motion.button>
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="p-2 rounded-full text-black hover:text-red-500"
-                >
-                  <a href="/cart">
-                    <ShoppingCart className="h-6 w-6" />
-                  </a>
-                </motion.button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
-  )
+          {/* Menu container */}
+          <div className="relative text-white p-8 z-40">
+            <nav>
+              <ul className="space-y-6 text-center">
+                {menuItems.map((item, index) => (
+                  <li key={index} className="transition duration-300 transform hover:scale-105">
+                    <Link
+                      to={item.link}
+                      className="flex items-center justify-center text-2xl text-white hover:text-red-500 transition-colors duration-300"
+                      onClick={toggleMenu}
+                    >
+                      <item.icon className="h-6 w-6 mr-2" />
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }

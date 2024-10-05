@@ -2,8 +2,8 @@ import { MapPin, Phone, Clock } from 'lucide-react';
 
 export default function Location() {
   return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold mb-8 text-center">Our Location</h1>
+    <div className="container bg-[#6B939B] mx-auto px-4 py-20 border-b-4  border-red-500">
+      <h1 className="text-4xl font-bold mb-20 text-center text-red-500 rounded-full bg-white py-3 px-5 mx-20">Our Location</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         <div>
           <div className="bg-white p-6 rounded-lg shadow-md">
