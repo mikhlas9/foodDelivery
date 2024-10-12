@@ -27,7 +27,7 @@ export default function CartPage() {
     <div>
         <Navbar color={"bg-red-500"} />
     
-    <div className="container mx-auto px-4 py-12 bg-[#f5e6c9]">
+    <div className="container w-full mx-auto px-4 py-12 bg-[#f5e6c9]">
       <h1 className="text-4xl font-bold mb-8 ml-20 mt-24 text-red-500">Your Cart</h1>
       {cart.length > 0 ? (
         <div className="bg-white rounded-lg shadow-lg p-6 mx-20">

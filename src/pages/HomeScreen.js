@@ -5,6 +5,9 @@ import DeliveryPromo from '../components/DeliveryPromo';
 import { BestSellers } from '../components/BestSellers';
 import Navbar from '../components/Navbar';
 import image from "../images/image.png"
+import Reservation from '../components/Reservation';
+import Reviews from '../components/Reviews';
+import SectionDivider from '../components/SectionDivider';
 
 export default function HomeScreen() {
   return (
@@ -30,8 +33,12 @@ export default function HomeScreen() {
         </div>
 
         <BestSellers />
+        <Reservation />
         <DeliveryPromo />
         <Location />
+        <SectionDivider type="triangle" topColor='#6B939B' bottomColor="#192231" />
+        <Reviews />
+        <SectionDivider type="zigzag" topColor='#6B939B' bottomColor="#192231" />
       </div>
     </div>
   );

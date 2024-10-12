@@ -42,8 +42,8 @@ export default function Menu() {
           {notification}
         </div>
       )}
-      <div className="container bg-[#f5e6c9] mx-auto px-4 py-8 ">
-        <h1 className="text-3xl font-bold mb-8 text-center text-red-500 mt-24 mb-20">Our Menu</h1>
+<div className="container bg-[#f5e6c9] mx-auto px-4 py-8 w-full ">
+<h1 className="text-3xl font-bold mb-8 text-center text-red-500 mt-24 mb-20">Our Menu</h1>
         <div className="flex flex-col md:flex-row justify-between mb-8">
           <div className="flex space-x-4">
             {categories.map((category) => (

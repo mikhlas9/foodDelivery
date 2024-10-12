@@ -23,7 +23,7 @@ export const BestSellers = () => {
   };
 
   return (
-    <div className="bg-[#6B939B] text-gray-800 py-20 border-b-4  border-red-500 relative">
+    <div className="bg-gradient-to-b from-[#6B939B] to-[#192231] text-gray-800 py-20 border-b-4  border-red-500 relative">
       {/* Notification for adding to cart */}
       {notification && (
         <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-2 rounded-full shadow-lg z-50 border-2 width-full">
