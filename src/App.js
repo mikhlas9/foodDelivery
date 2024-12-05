@@ -14,7 +14,8 @@ export default function App() {
     <Router>
       <div className="flex flex-col min-h-screen">
         {/* <Navbar /> */}
-        <main className="flex-grow">
+        {/* <HomeScreen /> */}
+        {/* <main className="flex-grow"> */}
           <Routes>
             <Route path="/" element={<HomeScreen />} />
             <Route path="/menu" element={<Menu />} />
@@ -23,7 +24,8 @@ export default function App() {
             <Route path="/product/:productId" element={<ProductPage />} />
             <Route path="/cart" element={<CartPage />} />
           </Routes>
-        </main>
+        {/* </main> */}
+
         <Footer />
       </div>
     </Router>
