@@ -13,9 +13,7 @@ export default function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
-        {/* <Navbar /> */}
-        {/* <HomeScreen /> */}
-        {/* <main className="flex-grow"> */}
+      
           <Routes>
             <Route path="/" element={<HomeScreen />} />
             <Route path="/menu" element={<Menu />} />
@@ -24,7 +22,7 @@ export default function App() {
             <Route path="/product/:productId" element={<ProductPage />} />
             <Route path="/cart" element={<CartPage />} />
           </Routes>
-        {/* </main> */}
+        
 
         <Footer />
       </div>
